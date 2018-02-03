@@ -13,6 +13,9 @@ this one is less that 1KB and does one thing, create a declarative way to publis
 ## Let me explain
 When building components with react, angular or any other "bundled" framework, components have a defined way of interaction (defined by the framework). But when building server-side components on a CMS, such as Adobe Experience Manager (AEM), those components are effectively HTML partials that are rendered separately then stitched together to form the HTML doc, essentially to enable a fantastic component authoring experience. As such, there is no good way to communicate between components.
 
+> Syrup is jQuery-dependent on purpose since the majority of sites built with CMS's such as AEM are jQuery based.
+> If you are already using a framework that allows component interactions, syrup's not for you!
+
 ## Enter syrupjs!
 syrupjs publishes native JS events such as `click` with a custom name. Components can subscribe to the event and react accordingly.
 
