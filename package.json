@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/babel ./vendor/tiny-pub-sub.js index.js -o ./dist/syrup.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"no tests added, yet\""
   },
   "babel": {
     "presets": [
