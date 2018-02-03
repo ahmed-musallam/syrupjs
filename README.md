@@ -16,7 +16,8 @@ When building components with react, angular or any other "bundled" framework, c
 ## Enter syrupjs!
 syrupjs publishes native JS events such as `click` with a custom name. Components can subscribe to the event and react accordingly.
 
-> Syrup's pub/sub is enabled by the amazingly minuscule [jquery-tiny-pubsub](https://github.com/cowboy/jquery-tiny-pubsub) 
+> Syrup's pub/sub is enabled by the amazingly minuscule [jquery-tiny-pubsub](https://github.com/cowboy/jquery-tiny-pubsub)
+> The syrup js embeds `jquery-tiny-pubsub`
 
 
 ## Example
@@ -78,3 +79,8 @@ effectively a comma separated pairs, where each pair is colon-separated. The fir
 
 ## Initializing syrup elements dynamically
 If you are creating elements dynamically and setting the `data-syrup` attribute on an element, you can trigger syrup initialization for the new element with `$('.your-element').syrup()`
+
+
+## Getting syrup.js
+You can download from the `dist` folder
+or you can build from source, clone the repo then `npm start`, the minified library will be in `dist/syrup.js`
