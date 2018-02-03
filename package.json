@@ -1,0 +1,47 @@
+{
+  "name": "syrupjs",
+  "version": "1.0.0",
+  "description": "A tiny pub/sub jQuery micro-framework for distant component interaction",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/babel ./vendor/tiny-pub-sub.js index.js -o ./dist/syrup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "minify"
+      ],
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "last 3 versions"
+            ]
+          },
+          "modules": false
+        }
+      ]
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmed-musallam/syrupjs.git"
+  },
+  "keywords": [
+    "pubsub",
+    "event"
+  ],
+  "author": "Ahmed Musallam <ahmed@ahmedmusallam.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ahmed-musallam/syrupjs/issues"
+  },
+  "homepage": "https://github.com/ahmed-musallam/syrupjs#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-minify": "^0.3.0"
+  }
+}
