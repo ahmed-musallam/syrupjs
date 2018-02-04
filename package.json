@@ -4,7 +4,7 @@
   "description": "A tiny pub/sub jQuery micro-framework for distant component interaction",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/babel ./vendor/tiny-pub-sub.js index.js -o ./dist/syrup.js",
+    "start": "./node_modules/.bin/babel ./vendor/tiny-pub-sub.js index.js -o ./dist/syrup.min.js",
     "test": "echo \"no tests added, yet\""
   },
   "babel": {

@@ -1,11 +1,17 @@
 # syrupjs
 [![Build Status](https://travis-ci.org/ahmed-musallam/syrupjs.svg?branch=master)](https://travis-ci.org/ahmed-musallam/syrupjs) ![](http://img.badgesize.io/ahmed-musallam/syrupjs/master/dist/syrup.js.svg)
 ![](http://img.badgesize.io/ahmed-musallam/syrupjs/master/dist/syrup.js.svg?compression=gzip)
->A tiny pub/sub micro-framework for distant component interaction
+>A tiny pub/sub micro-framework for distant component interaction enabled by [jquery-tiny-pubsub](https://github.com/cowboy/jquery-tiny-pubsub)
 > 
 > **To be clear**, one-way interactions via pub-sub pattern.
 
 ![syrupjs](syrupjs.png)
+
+## Getting syrup.js
+You can download from the `dist` folder
+or you can build from source, clone the repo then `npm start`, the minified library will be in `dist/syrup.min.js`
+
+> the `npm start` script minifies and concatenates syrup.js and [jquery-tiny-pubsub](https://github.com/cowboy/jquery-tiny-pubsub)
 
 ## Why another js framework
 this one is less that 1KB and does one thing, create a declarative way to publish custom events when native JS events are triggered.
@@ -20,7 +26,7 @@ When building components with react, angular or any other "bundled" framework, c
 syrupjs publishes native JS events such as `click` with a custom name. Components can subscribe to the event and react accordingly.
 
 > Syrup's pub/sub is enabled by the amazingly minuscule [jquery-tiny-pubsub](https://github.com/cowboy/jquery-tiny-pubsub)
-> The syrup js embeds `jquery-tiny-pubsub`
+> syrupjs embeds `jquery-tiny-pubsub`
 
 
 ## Example
@@ -31,9 +37,9 @@ you have a button component
   show me the money
 </button>
 ```
-> notice the `data-syrup="click:show-me-the-money"` we'll get to that in abit
+> notice the `data-syrup="click:show-me-the-money"` we'll get to that in a bit
 
-And you have a mony component that is hidden by default
+And you have a money component that is hidden by default
 
 ```html
 <div class="js-money" style="display:none">
@@ -69,12 +75,14 @@ The core of this library is the `data-syrup` attributes, the value of that attri
 the following values are valid:
 
 * `click:custom-event`
-* `click:custom-click-event,hover:custom-hover-event`
+* `click:custom-click-event,focus:custom-focus-event`
 * `mouseenter:show-me-the-money, mouseleave:hide-the-money, click:make-mony-blue`
 
 effectively a comma separated pairs, where each pair is colon-separated. The first value of the pair is a native JS event that will be registered to the current element. The second is a custom event name to be published when the native Js event is triggered.
 
-> The native event name is passed to jQuery's [.on](http://api.jquery.com/on/) method
+> The native event name is passed to jQuery's [.on](http://api.jquery.com/on/) method.
+> 
+> If an event does not work on a specific element, make sure to test it independently `$(<selector>).on(<event>, console.log)`or read the event documentation to see if the target element has issues with that particular event.
 > 
 > Refer to javascript's [native events](https://developer.mozilla.org/en-US/docs/Web/Events) for the complete list.
 
@@ -83,7 +91,31 @@ effectively a comma separated pairs, where each pair is colon-separated. The fir
 ## Initializing syrup elements dynamically
 If you are creating elements dynamically and setting the `data-syrup` attribute on an element, you can trigger syrup initialization for the new element with `$('.your-element').syrup()`
 
+## The `$.subscribe` method
+The `$.subscribe` method is provided by [jquery-tiny-pubsub](https://github.com/cowboy/jquery-tiny-pubsub) which is included with syrupjs.
 
-## Getting syrup.js
-You can download from the `dist` folder
-or you can build from source, clone the repo then `npm start`, the minified library will be in `dist/syrup.js`
+```
+$.subscribe(<event-name>, callback)
+```
+where `callback` is `Function(customEvent, originalJSEvent, sourceElement)`
+
+> custom params are coming soon
+
+example:
+
+```html
+<button data-syrup="click:say-hi">say hi<button>
+<div class="js-text"><div>
+```
+
+```javascript
+$(function(){
+  $.subscribe('say-hi', function(customE, originalE, originalEl){
+    console.log(customE) // this is the `say-hi` event
+    console.log(originalE) // this is the click event
+    console.log(originalEl) // this is the clicked element
+    $('.js-text').html('hello there')
+<button>
+  });
+})
+```
